@@ -1,0 +1,69 @@
+users:
+    get:
+        description: |
+            gets users
+        operationId: getUsers
+
+        responses:
+            '200':
+                description: users
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    post:
+        description: |
+            creates a new user
+        operationId: postUser
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: details for a new user
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/User'
+
+        responses:
+            '200':
+                description: user
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        User:
+            required:
+                - first_name
+                - last_name
+                - phone
+                - full_address
+                - ssn
+            properties:
+                first_name:
+                    type: string
+                last_name:
+                    type: string
+                phone:
+                    type: string
+                full_address:
+                    type: string
+                ssn:
+                    type: string
+                    maxLength: 9
+                    minLength: 9
