@@ -1,48 +1,114 @@
-# Lightyear FullStack Challenge Template
+# Shipping Service Facade API Layer
+> This shipping service is a facade API layer meant to consolidate shipping quotes from a variety of sources and allow users to confirm a shipment, view their shipment details, and cancel.
 
-# The Challenge
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
+* [Directory Structure](#directory)
+* [Setup](#setup)
+* [Documentation](#documentation)
+* [Features](#features)
+* [Contact](#contact)
 
-Hey friendly developer! Our CEO, Dennis, recently had an ask of us. He needs us to create a display of his most important customers, and be able to add, edit, and delete from this list. Unfortunately he has only given us one night to make it happen.
+## General info
+This is a dummy project developed to show off backend development with a suite of technologies. One goal for this project is to ensure the ease of use with respect to set up. All of these technologies can be found below.
 
-I hope you can help us handle it, but I think you're up for the challenge!
+## Technologies
+* Node.js
+* Express.js
+* Sequelize ORM
+* OpenAPI 3.0
+* MySQL
+* Docker
 
-> **For real though:**
-> Our team hopes that you can spend around two-three hours on this challenge. If you finish faster, that's awesome! If not, please don't spend too much longer, and instead just think about what else you might do/have done for our discussion.
+## Directory
+    .
+    ├── ...
+    ├── backend
+    │   ├── src                     # source code for backend
+    │   |   ├── db                  # DB Models and configuration
+    │   |   ├── helpers             # Helper code
+    │   |   ├── server  
+    │   |   |   ├── auth            # Placeholder auth for JWT.
+    │   |   |   ├── controllers     # Controllers for API
+    │   |   |   └── routes          # Routes for API
+    │   |   └── spec                # OpenAPI spec documentation
+    │   ├── tests                   # End-to-end, integration tests (alternatively `e2e`)
+    │   ├── sequelize               # Sequelize ORM configuration and migrations
+    │   └── coverage                # Code coverage report
+    └── ...
 
-# Your Tasks
+## Setup
+This project is built using Docker containers, thus you will need Docker installed for it to work. A docker-compose file is placed in the root of the repository. Follow the steps below to get started:
 
-- Primary Objective: create a functional display of customers, as well as basic CRUD ability through a backend API. Functionality is more important than beauty here, but we also want to see what you've got!
-- Customer information should at least include name, company, priority/importance of some sort (potentially through tags?), and can include any other fields your creativity may see fit.
-- When you have completed the challenge to your satisfaction, and prior to our scheduled discussion, send the zipped solution files to ryan@lightyear.ai.
-
-# Some Tips
-
-- We've provided you with a basic framework to hopefully get started faster from. This includes a basic Django Rest Framework and Postgres database in a docker container, and a bare bones React app.
-- Feel free to utilize whatever libraries, structure, or even a completely custom solution if you would like. The sky is the limit here!
-- Assume you don't need to worry about vast browser support
-
-# Running the Challenge Framework
-
-If you decide to utilize our framework, we have some quick notes on getting it running on your local machine.
-
-## Backend
-
-The backend and database are dockerized, and can be run by navigating to the backend folder, and utilizing the following commands:
+Check out the repository:
 
 ```
-docker-compose build
+git clone https://github.com/maraja/shipment-facade-api
+```
+
+Change into the repository directory:
+
+```
+cd shipment-facade-api
+```
+
+Run the following Docker command within the root directory:
+
+```
 docker-compose up
 ```
 
-The api should then be accessible from **localhost:8000**.
+#### To edit code
+Before working with the code, you must have Node.js installed (the latest LTS version should work just fine). Change into the backend repository directory:
 
-## Frontend
+```
+cd shipment-facade-api/backend
+```
+Install yarn:
 
-The React app was built using create-react-app, and can be run by navigating to the frontend directory and running the following commands in a seperate terminal:
+```
+npm install -g yarn
+```
 
+Install all the necessary modules:
 ```
 yarn
-yarn start
 ```
 
-The React app should then be accessible from **localhost:3000**.
+Now you can begin editing! Once you start the application following the instructions at the beginning of the setup (i.e., running `docker-compose up`), editing any file will automatically restart the application.
+
+
+#### To run tests
+
+```
+docker-compose run --rm backend yarn test
+```
+
+#### To re-initialize db
+
+You can reinitialize the db in case anything goes wrong. Simply connect to the docker container as shown above and run the following command: `yarn init`
+
+## Documentation
+API Documentation can be found here: https://documenter.getpostman.com/view/395098/T17KeSmG?version=latest
+
+## Features
+List of features ready and TODOs for future development
+* Create, get, and delete shipments
+* Get shipment quotes
+* MySQL database with migrations
+* Unit Testing and Code Coverage
+
+To-do list:
+* Implement JWT as a form of authentication for authorized requests.
+* When cancelling a shipment, should just set a flag in the table to "cancelled" instead of removing entirely. Application will gracefully handle these cancellations.
+* More unit tests should be done to ensure origin and destination addresses are provided successfully.
+* Input validation and sanization needse to be done.
+
+## Extra Notes
+
+Great resource for learning and setting up the db with sequelize. Although I used MySQL and this article uses PostGreSQL, all the concepts remain the same:
+https://www.oriechinedu.com/posts/getting-started-with-sequelize-and-postgres
+
+## Contact
+Created by [@maraja](mailto:amit.maraj@gmail.com) - feel free to contact me!
