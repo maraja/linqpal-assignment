@@ -21,8 +21,9 @@ const tailLayout = {
 // import LinqPalService from "#root/api/apiClient";
 
 
-const LoginForm = ({}) => {
+const LoginForm = (props) => {
   // let [users, setUsers] = useState([]);
+  let [authenticated, setAuthenticated] = useState(false);
 
   // async function fetchUsers() {
   //   let newUsers = await LinqPalService.fetchUsers();
@@ -35,44 +36,37 @@ const LoginForm = ({}) => {
   // }, [])
   const [form] = Form.useForm();
 
-  const onFinish = async values => {
-    console.log(values);
-    let user = null
+  async function authenticate(values) {
+    console.log(await LinqPalService.authenticate({ email: "admin@example.com", password: "password"}))
+    let result = null
     try {
-      user = await LinqPalService.createUser(values);
+      result = await LinqPalService.authenticate(values)
     } catch(e) {
       let error = formatError(e)
       message.error(error.message)
     }
 
-    if (user) {
-      form.resetFields();
-      message.success("User successfully created!")
+    if (result.data.success == true) {
+      message.success("Admin successfully authenticated!")
+      setAuthenticated(true)
+    } else {
+      message.error("Something went wrong")
     }
-  };
+  }
 
   const onReset = () => {
     form.resetFields();
   };
 
-  return (
+  return !authenticated ? (
     <Layout>
-    <h1>New User</h1>
-    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-      <Form.Item name="first_name" label="First Name" rules={[{ required: true }]}>
+    <h1>Admin Login</h1>
+    <Form {...layout} form={form} name="control-hooks" onFinish={authenticate}>
+      <Form.Item name="email" label="Email" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="last_name" label="Last Name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="phone" label="Phone Name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="full_address" label="Full Address" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="ssn" label="SSN" rules={[{ required: true, max: 9, min: 9 }]}>
-        <Input />
+      <Form.Item name="password" label="password" rules={[{ required: true }]}>
+        <Input type="password" />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="submit" htmlType="submit">
@@ -81,7 +75,7 @@ const LoginForm = ({}) => {
       </Form.Item>
     </Form>
     </Layout>
-  )
+  ) : <React.Fragment>{props.children}</React.Fragment>
 };
 
 export default LoginForm;

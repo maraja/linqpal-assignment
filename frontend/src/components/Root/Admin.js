@@ -42,13 +42,30 @@ const Admin = ({}) => {
     setUsers(await LinqPalService.fetchUsers());
   }
 
+  // async function authenticate(values) {
+  //   console.log(await LinqPalService.authenticate({ email: "admin@example.com", password: "password"}))
+  //   let result = null
+  //   try {
+  //     result = await LinqPalService.authenticate(values)
+  //   } catch(e) {
+  //     let error = formatError(e)
+  //     message.error(error.message)
+  //   }
+
+  //   if (result.data.success == true) {
+  //     message.success("User successfully authenticated!")
+  //     setAuthenticated(true)
+  //   }
+  // }
+
   useEffect(() => {
     fetchUsers()
+    // authenticate()
   }, [])
 
   return (
     <Layout>
-      <h1>Users</h1>
+      <h1>Users ({users.length})</h1>
       {/* <Button >Hello World</Button> */}
       <Table columns={columns} dataSource={users} />
       {/* {users.length > 0 && users.map(u => (

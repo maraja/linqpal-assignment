@@ -1,5 +1,5 @@
-# Shipping Service Facade API Layer
-> This shipping service is a facade API layer meant to consolidate shipping quotes from a variety of sources and allow users to confirm a shipment, view their shipment details, and cancel.
+# LinqPal Technical Assignment
+> This project is aimed to develop a frontend, backend, and database suitable for the LinqPal technical assessment as a part of their hiring process. Additionally, this code can be used as a boilerplate to start a Node.js/Express.js/React.js web application.
 
 ## Table of contents
 * [General info](#general-info)
@@ -36,6 +36,9 @@ This is a dummy project developed to show off backend development with a suite o
     │   ├── tests                   # End-to-end, integration tests (alternatively `e2e`)
     │   ├── sequelize               # Sequelize ORM configuration and migrations
     │   └── coverage                # Code coverage report
+    ├── frontend
+    │   ├── src                     # source code for frontend
+    │   └── dist                    # Dist folder to hold all static assets once compiled.
     └── ...
 
 ## Setup
@@ -44,13 +47,13 @@ This project is built using Docker containers, thus you will need Docker install
 Check out the repository:
 
 ```
-git clone https://github.com/maraja/shipment-facade-api
+git clone https://github.com/maraja/linqpal-assignment
 ```
 
 Change into the repository directory:
 
 ```
-cd shipment-facade-api
+cd linqpal-assignment
 ```
 
 Run the following Docker command within the root directory:
@@ -63,7 +66,7 @@ docker-compose up
 Before working with the code, you must have Node.js installed (the latest LTS version should work just fine). Change into the backend repository directory:
 
 ```
-cd shipment-facade-api/backend
+cd linqpal-assignment/backend
 ```
 Install yarn:
 
@@ -90,20 +93,20 @@ docker-compose run --rm backend yarn test
 You can reinitialize the db in case anything goes wrong. Simply connect to the docker container as shown above and run the following command: `yarn init`
 
 ## Documentation
-API Documentation can be found here: https://documenter.getpostman.com/view/395098/T17KeSmG?version=latest
+API Documentation can be found here: https://documenter.getpostman.com/view/395098/TVCfVTgR
 
 ## Features
 List of features ready and TODOs for future development
-* Create, get, and delete shipments
-* Get shipment quotes
+* Create and authenticate admins
+* Create and get all users
+* Sign up new user
+* External and Admin panel
 * MySQL database with migrations
-* Unit Testing and Code Coverage
 
 To-do list:
 * Implement JWT as a form of authentication for authorized requests.
-* When cancelling a shipment, should just set a flag in the table to "cancelled" instead of removing entirely. Application will gracefully handle these cancellations.
 * More unit tests should be done to ensure origin and destination addresses are provided successfully.
-* Input validation and sanization needse to be done.
+* Input validation and sanization needs to be done.
 
 ## Extra Notes
 

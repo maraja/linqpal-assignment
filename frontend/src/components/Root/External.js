@@ -65,7 +65,7 @@ const External = ({}) => {
       <Form.Item name="last_name" label="Last Name" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-      <Form.Item name="phone" label="Phone Name" rules={[{ required: true }]}>
+      <Form.Item name="phone" label="Phone" rules={[{ required: true }]}>
         <Input />
       </Form.Item>
       <Form.Item name="full_address" label="Full Address" rules={[{ required: true }]}>

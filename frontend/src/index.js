@@ -13,6 +13,8 @@ import External from "#root/components/Root/External";
 import Admin from "#root/components/Root/Admin";
 import Home from "#root/components/Root/Home";
 
+import Auth from "#root/components/Shared/LoginForm";
+
 import * as theme from "./theme";
 import './index.less';
 
@@ -40,7 +42,7 @@ render(
               <External />
             </Route>
             <Route path="/admin">
-              <Admin />
+              <Auth><Admin /></Auth>
             </Route>
             <Route path="/">
               <Home />
